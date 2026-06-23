@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="88" viewBox="0 0 320 88" fill="none">
+  <g stroke="#00D4FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Anchor Ring -->
+    <circle cx="38" cy="44" r="17"/>
+    
+    <!-- Anchor Shaft -->
+    <line x1="38" y1="27" x2="38" y2="62"/>
+    
+    <!-- Anchor Arms -->
+    <path d="M24 54 Q38 66 52 54"/>
+    
+    <!-- Swarm Nodes -->
+    <circle cx="60" cy="26" r="3.5" fill="#00D4FF"/>
+    <circle cx="68" cy="44" r="3.5" fill="#00D4FF"/>
+    <circle cx="58" cy="60" r="3.5" fill="#00D4FF"/>
+    
+    <!-- Swarm Connections -->
+    <line x1="53" y1="33" x2="60" y2="26" stroke-opacity="0.5"/>
+    <line x1="53" y1="44" x2="68" y2="44" stroke-opacity="0.5"/>
+    <line x1="53" y1="55" x2="58" y2="60" stroke-opacity="0.5"/>
+  </g>
+  
+  <!-- Text (White for dark mode) -->
+  <text x="88" y="55" 
+        font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+        font-size="42" font-weight="700" fill="#FFFFFF" letter-spacing="-1.2">Harbor</text>
+</svg>

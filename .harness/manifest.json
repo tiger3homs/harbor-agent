@@ -1,0 +1,31 @@
+{
+  "version": "0.3.0",
+  "name": "structured-clause-agent",
+  "description": "Security and integrity manifest for the structured-clause-agent meta-harness",
+  "fingerprint": {
+    "critical_files": [
+      {
+        "path": "src/skills.ts",
+        "sha256": "auto-generated-on-build"
+      },
+      {
+        "path": "src/plugin.ts",
+        "sha256": "auto-generated-on-build"
+      },
+      {
+        "path": "src/subagents.ts",
+        "sha256": "auto-generated-on-build"
+      }
+    ]
+  },
+  "security": {
+    "mcp_policy": ".harness/mcp-policy.json",
+    "redaction_enabled": true,
+    "witness_required": false
+  },
+  "swarm": {
+    "max_subagents": 12,
+    "default_consensus": "raft",
+    "self_healing": true
+  }
+}

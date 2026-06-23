@@ -1,0 +1,25 @@
+{
+  "version": "1.0",
+  "description": "MCP governance policy for structured-clause-agent",
+  "rules": [
+    {
+      "name": "no_credential_leak",
+      "description": "Prevent API keys and secrets from being stored in observations",
+      "action": "redact"
+    },
+    {
+      "name": "skill_integrity",
+      "description": "Only allow skills from verified sources (vercel-labs, ruvnet, anthropic)",
+      "action": "warn"
+    },
+    {
+      "name": "subagent_limit",
+      "description": "Maximum 12 concurrent subagents",
+      "action": "enforce"
+    }
+  ],
+  "witness": {
+    "enabled": false,
+    "note": "Enable witness signing for production deployments"
+  }
+}

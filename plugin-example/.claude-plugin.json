@@ -1,0 +1,20 @@
+{
+  "name": "structured-clause-agent",
+  "version": "0.3.0",
+  "description": "Intelligent skill detection, installation, and real-time injection for Claude Code",
+  "author": "Structured Clause Agent Team",
+  "main": "claude-code-plugin.ts",
+  "capabilities": [
+    "skill-detection",
+    "automatic-installation",
+    "context-injection",
+    "subagent-orchestration"
+  ],
+  "endpoints": {
+    "hook": "http://localhost:37701/plugin/hook",
+    "manifest": "http://localhost:37701/plugin/manifest"
+  },
+  "requires": {
+    "structured-clause-agent": ">=0.3.0"
+  }
+}

@@ -38,6 +38,3 @@ coverage/
 # Misc
 .cache/
 *.tgz
-package-lock.json
-yarn.lock
-pnpm-lock.yaml

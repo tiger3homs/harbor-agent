@@ -92,9 +92,9 @@ const SKILL_PATTERNS: Record<string, { skill: string; triggers: string[]; catego
     triggers: ['deploy to vercel', 'vercel deploy', 'production deploy'],
     category: 'devops'
   },
-  'docker-compose': {
-    skill: 'docker-compose',
-    triggers: ['docker', 'containerize', 'docker compose', 'kubernetes'],
+  'docker-expert': {
+    skill: 'docker-expert',
+    triggers: ['docker', 'containerize', 'docker compose', 'kubernetes', 'container', 'dockerfile'],
     category: 'devops'
   },
 
@@ -190,13 +190,48 @@ export function isSkillInstalled(skillName: string): boolean {
  * Reads the full SKILL.md content of an installed skill (for injection)
  */
 export function loadSkillContent(skillName: string): string | null {
-  const projectPath = path.join(process.cwd(), '.claude', 'skills', skillName, 'SKILL.md');
-  const globalPath = path.join(process.env.HOME || '', '.claude', 'skills', skillName, 'SKILL.md');
+  const home = process.env.HOME || '';
+  const cwd = process.cwd();
 
-  const skillPath = fs.existsSync(projectPath) ? projectPath : globalPath;
-  if (!fs.existsSync(skillPath)) return null;
+  // Direct lookup first
+  const candidates = [
+    path.join(cwd, '.claude', 'skills', skillName, 'SKILL.md'),
+    path.join(home, '.claude', 'skills', skillName, 'SKILL.md'),
+  ];
+  for (const p of candidates) {
+    if (fs.existsSync(p)) return fs.readFileSync(p, 'utf8');
+  }
 
-  return fs.readFileSync(skillPath, 'utf8');
+  // Fuzzy match against installed skills
+  const installed = listInstalledSkillNames(home, cwd);
+  // Extract keywords from skillName and find best installed skill match
+  const lower = skillName.toLowerCase().replace(/[-_]/g, '');
+  const keywords = skillName.toLowerCase().split(/[-_\s]+/).filter(w => w.length > 2);
+  const match = installed.find(n => {
+    const nLower = n.toLowerCase().replace(/[-_]/g, '');
+    if (nLower.includes(lower) || lower.includes(nLower)) return true;
+    const nKeywords = n.toLowerCase().split(/[-_\s]+/).filter(w => w.length > 2);
+    return keywords.some(k => nKeywords.some(nk => nk.includes(k) || k.includes(nk)));
+  });
+  if (match) {
+    for (const base of [cwd, home]) {
+      const p = path.join(base, '.claude', 'skills', match, 'SKILL.md');
+      if (fs.existsSync(p)) return fs.readFileSync(p, 'utf8');
+    }
+  }
+
+  return null;
+}
+
+function listInstalledSkillNames(home: string, cwd: string): string[] {
+  const names: string[] = [];
+  for (const base of [home, cwd]) {
+    const dir = path.join(base, '.claude', 'skills');
+    try {
+      if (fs.existsSync(dir)) names.push(...fs.readdirSync(dir));
+    } catch {}
+  }
+  return [...new Set(names)];
 }
 
 /**

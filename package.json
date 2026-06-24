@@ -1,5 +1,5 @@
 {
-  "name": "harbor",
+  "name": "harbor-agent",
   "version": "0.3.0",
   "description": "Harbor — The Skills Operating System for Claude Code. Automatic skill detection, subagent swarms, meta-harness security, and 90%+ token reduction.",
   "main": "dist/index.js",
@@ -16,7 +16,8 @@
     "test": "echo \"Tests coming soon\" && exit 0",
     "lint": "echo \"Linting not yet configured\"",
     "prepare": "npm run build",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "postinstall": "node scripts/postinstall.js || true"
   },
   "keywords": [
     "claude",
@@ -66,6 +67,7 @@
   },
   "files": [
     "dist",
+    "scripts",
     "README.md",
     "LICENSE"
   ]

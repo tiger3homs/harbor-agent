@@ -1,0 +1,30 @@
+{
+  "description": "Harbor Skills OS — automatic skill detection and injection for Claude Code",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "HARBOR_DIR=\"${HARBOR_PLUGIN_ROOT:-/root/harbor-agent}\"; curl -sf http://localhost:37701/harness/status > /dev/null 2>&1 || (cd \"$HARBOR_DIR\" && node dist/index.js &>/dev/null & disown && sleep 2); echo '{\"continue\":true,\"suppressOutput\":true,\"status\":\"ready\"}'",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "/root/harbor-agent/hooks/harbor-hook.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

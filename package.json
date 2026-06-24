@@ -34,12 +34,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tiger3homs/harbor.git"
+    "url": "https://github.com/tiger3homs/harbor-agent.git"
   },
   "bugs": {
-    "url": "https://github.com/tiger3homs/harbor/issues"
+    "url": "https://github.com/tiger3homs/harbor-agent/issues"
   },
-  "homepage": "https://github.com/tiger3homs/harbor",
+  "homepage": "https://github.com/tiger3homs/harbor-agent",
   "dependencies": {
     "better-sqlite3": "^11.1.2",
     "blessed": "^0.1.81",
